@@ -16,7 +16,9 @@ router.post('/', async (req, res) => {
   } catch (error) {
     console.log(error);
     if (error.code === 11000) {
-      return res.status(400).send({ message: 'Duplicated Data', error });
+      return res
+        .status(400)
+        .send({ message: 'Duplicated Data', error });
     }
     res.status(400).send({ message: 'sth wrong', error });
   }
@@ -24,9 +26,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const docs = await PostModel.find({
-      createdBy: req.user._id,
-    })
+    const docs = await PostModel.find({createdBy: req.user._id,})
       .lean()
       .exec();
 
@@ -35,7 +35,9 @@ router.get('/', async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(400).json({ message: 'sth wrong', error });
+    res
+      .status(400)
+      .json({ message: 'sth wrong', error });
   }
 });
 
@@ -67,16 +69,17 @@ router.put('/:id', async (req, res) => {
         _id: req.params.id,
       },
       req.body,
-      { new: true },
-    )
-      .lean()
-      .exec();
+      {
+        new: true
+      },
+    ).lean().exec();
 
     if (!updatedDoc) {
       return res.status(400).json({ message: 'cannot update the data' });
     }
 
     res.status(200).json({ ...updatedDoc });
+
   } catch (error) {
     console.error(error);
     res.status(400).json({ message: 'sth wrong', error });

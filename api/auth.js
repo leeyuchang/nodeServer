@@ -4,7 +4,6 @@ const Router = require('express');
 
 // modules
 const newToken = require('../utils/newToken.js');
-// const newToken = require('../utils/authTest.js');
 const UserModel = require('../models/UserModel.js');
 
 // router init
@@ -54,49 +53,31 @@ router.post('/login', (req, res) => {
     });
 });
 
-// router.post('/signup', (req, res) => {
-//   const { username, password, nickname } = req.body;
-//   // encrypt password
-//   // NOTE: 10 is saltround which is a cost factor
-//   bcrypt.hash(password, 10, (error, hashedPassword) => {
-//     if (error) {
-//       console.log(error);
-//       return res.status(500).json({
-//         error,
-//       });
-//     } else {
-//       const newUser = new UserModel({
-//         username,
-//         password: hashedPassword,
-//         nickname,
-//       });
-//       newUser.save((error, saved) => {
-//         if (error) {
-//           console.log(error);
-//           res.status(409).send(error);
-//         } else {
-//           console.log(saved);
-//           res.send(saved);
-//         }
-//       });
-//     }
-//   });
-// });
+router.post('/signup', (req, res) => {
+  const { username, password, nickname } = req.body;
+  // encrypt password
+  // NOTE: 10 is saltround which is a cost factor
+  bcrypt.hash(password, 10, (error, hashedPassword) => {
+    if (error) {
+      console.log(error);
+      return res.status(500).json({error,});
+    } else {
+      const newUser = new UserModel({
+        username,
+        password: hashedPassword,
+        nickname,
+      });
+      newUser.save((error, saved) => {
+        if (error) {
+          console.log(error);
+          res.status(409).send(error);
+        } else {
+          console.log(saved);
+          res.send(saved);
+        }
+      });
+    }
+  });
+});
 
-// const SECRET_KEY = 'vuex-with-token';
-// const EXPIRATION_DATE = '100d';
-
-// // module.exports =
-// newToken = user => {
-//   console.log('newToken', user);
-//   const payload = {
-//     username: user.username,
-//     _id: user._id,
-//   };
-//   return jwt.sign(payload, SECRET_KEY, {
-//     expiresIn: EXPIRATION_DATE,
-//   });
-// };
-
-// exports.router;
 module.exports = router;
