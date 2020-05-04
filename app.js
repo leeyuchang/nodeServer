@@ -18,7 +18,7 @@ const authenticateUser = require('./utils/authenticateUser.js');
 // mongo db
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-mongoose.connect('mongodb+srv://test:1234@cluster0-prnef.gcp.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser: true});
+mongoose.connect('',{useNewUrlParser: true});
 mongoose.Promise = global.Promise;
 
 // express setup
