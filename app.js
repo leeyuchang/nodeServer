@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 5000
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const chalk = require('chalk');
+// const chalk = require('chalk');
 
 // api
 const auth = require('./api/auth.js');
@@ -33,4 +33,4 @@ app.use(express.static(path.join(__dirname, 'public')))
 // app.use('/posts', authenticateUser, posts);
 app.get('/cool', (req, res) => res.send(cool()))
 // start
-app.listen(PORT, () => console.log(`${chalk.white.bgHex('#41b883').bold(`VUE TIL SERVER IS RUNNING ON ${PORT}`)}`));
+app.listen(PORT, () => console.log(`VUE TIL SERVER IS RUNNING ON ${PORT}`));
