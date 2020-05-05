@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 5000
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 // const chalk = require('chalk');
 
 // api
@@ -25,6 +26,7 @@ mongoose.Promise = global.Promise;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors({ origin: true, credentials: true }));
 
 // express routers
 app.use('/', auth);
