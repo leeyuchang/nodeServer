@@ -1,13 +1,3 @@
-# nodeServer
-Node Server
-
-## echo
-POST ​/signup
-・username
-・password
-・nickname
-
-POST ​/login
-・username
-・password
-
+# nodeServer on Heroku
+### express.js
+### mongoDB
